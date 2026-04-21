@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Foundation Builder | Readiness Setup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #F6F3EF;
+      --panel: #FCFAF8;
+      --panel-strong: #F1E7E0;
+      --text: #3E3A38;
+      --muted: #7A6F68;
+      --line: rgba(122, 111, 104, 0.24);
+      --accent: #C28A73;
+      --accent-soft: #E8DAD3;
+      --success-bg: #f2ebe6;
+      --success-text: #665c56;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+    }
+
+    .wrap {
+      width: min(980px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero,
+    .panel,
+    .summary-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 8px 22px rgba(62, 58, 56, 0.05);
+    }
+
+    .hero {
+      padding: 30px 28px;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      font-weight: 600;
+      line-height: 0.98;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .hero p,
+    .section-copy,
+    .helper,
+    .muted {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero p {
+      max-width: 50rem;
+      margin: 0 auto;
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .section-copy {
+      margin-bottom: 18px;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .task-card,
+    .field-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fffdfa 0%, #fbf7f3 100%);
+    }
+
+    .task-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .task-top input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      margin-top: 4px;
+      accent-color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .task-label {
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .optional-tag {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+
+    .support-note {
+      margin-top: 4px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .task-fields,
+    .field-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdfa;
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid rgba(194, 138, 115, 0.22);
+      border-color: rgba(194, 138, 115, 0.65);
+    }
+
+    .helper {
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      background: #fbf4f0;
+      margin-bottom: 16px;
+    }
+
+    .summary-panel {
+      padding: 24px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .summary-item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--success-bg);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .status {
+      color: var(--success-text);
+      font-weight: 500;
+    }
+
+    .ready-message {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--panel-strong);
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .nav-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--text);
+      text-decoration: none;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 140ms ease, transform 140ms ease;
+    }
+
+    .nav-button:hover,
+    .nav-button:focus-visible {
+      background: #ddc7be;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .nav-button.primary {
+      background: var(--accent);
+      border-color: rgba(194, 138, 115, 0.75);
+      color: #fffaf7;
+    }
+
+    .nav-button.primary:hover,
+    .nav-button.primary:focus-visible {
+      background: #b77961;
+    }
+
+    .corner-stamp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 64px;
+      opacity: 0.35;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero,
+      .panel,
+      .summary-panel {
+        padding: 20px;
+      }
+
+      .task-fields,
+      .field-grid,
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-actions {
+        flex-direction: column;
+      }
+
+      .nav-button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      .corner-stamp {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Financial Foundation Builder</h1>
+      <p>
+        This workspace is here to help you prepare your household structure before stepping into Pivot. You do not need perfect systems yet. You only need enough visibility and setup to support the containment process.
+      </p>
+    </section>
+
+    <form id="foundation-form">
+      <section class="panel" aria-labelledby="banking-setup-title">
+        <h2 id="banking-setup-title">Section 1: Banking Structure Setup</h2>
+        <p class="section-copy">
+          Confirm the account structure you already have in place, or note what still needs to be designated. Optional pieces can still strengthen the system even if they are not finished yet.
+        </p>
+        <div class="task-list">
+          <article class="task-card">
+            <div class="task-top">
+              <input id="banking-primary-checking" name="bankingPrimaryCheckingChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="banking-primary-checking">Primary checking account exists</label>
+              </div>
+            </div>
+            <div class="task-fields">
+              <label>
+                Optional notes
+                <textarea name="bankingPrimaryCheckingNotes" placeholder="Add any details you want to remember."></textarea>
+              </label>
+              <label>
+                Completion date
+                <input name="bankingPrimaryCheckingDate" type="date">
+              </label>
+            </div>
+          </article>
+
+          <article class="task-card">
+            <div class="task-top">
+              <input id="banking-bill-payment" name="bankingBillPaymentChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="banking-bill-payment">Bill-payment account exists or will be designated</label>
+              </div>
+            </div>
+            <div class="task-fields">
+              <label>
+                Optional notes
+                <textarea name="bankingBillPaymentNotes" placeholder="Name the account or note what still needs to be decided."></textarea>
+              </label>
+              <label>
+                Completion date
+                <input name="bankingBillPaymentDate" type="date">
+              </label>
+            </div>
+          </article>
+
+          <article class="task-card">
+            <div class="task-top">
+              <input id="banking-spending" name="bankingSpendingChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="banking-spending">Spending account exists</label>
+                <p class="support-note">Optional, but recommended for separating everyday use from bill activity.</p>
+              </div>
+            </div>
+            <div class="task-fields">
+              <label>
+                Optional notes
+                <textarea name="bankingSpendingNotes" placeholder="Add any setup details, even if this is still in progress."></textarea>
+              </label>
+              <label>
+                Completion date
+                <input name="bankingSpendingDate" type="date">
+              </label>
+            </div>
+          </article>
+
+          <article class="task-card">
+            <div class="task-top">
+              <input id="banking-savings" name="bankingSavingsChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="banking-savings">Savings location exists</label>
+                <span class="optional-tag">Optional but recommended</span>
+              </div>
+            </div>
+            <div class="task-fields">
+              <label>
+                Optional notes
+                <textarea name="bankingSavingsNotes" placeholder="This can be a savings account, emergency fund location, or other holding place."></textarea>
+              </label>
+              <label>
+                Completion date
+                <input name="bankingSavingsDate" type="date">
+              </label>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="income-awareness-title">
+        <h2 id="income-awareness-title">Section 2: Income Landing Awareness</h2>
+        <p class="section-copy">
+          Before containment can work smoothly, you need to know where income lands and what happens next.
+        </p>
+        <div class="helper">
+          Knowing the landing point for income helps you see whether money is arriving in a way that supports bill separation, spending clarity, and monthly decision-making. This is not about perfection. It is about visibility.
+        </div>
+        <div class="field-grid">
+          <label>
+            Where does income currently deposit?
+            <input name="incomeDepositLocation" type="text" placeholder="Example: Main checking at Community Bank">
+          </label>
+          <label>
+            Are deposits split or single-account?
+            <select name="incomeDepositStructure">
+              <option value="">Select one</option>
+              <option value="single-account">Single-account</option>
+              <option value="split-deposits">Split deposits</option>
+              <option value="mixed-or-unsure">Mixed or unsure</option>
+            </select>
+          </label>
+        </div>
+        <div class="field-grid single" style="margin-top: 14px;">
+          <label>
+            Is bill money separated after deposit?
+            <select name="incomeBillSeparation">
+              <option value="">Select one</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="working-on-it">Working on it</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="bill-awareness-title">
+        <h2 id="bill-awareness-title">Section 3: Bill Awareness Setup</h2>
+        <p class="section-copy">
+          This section is only about visibility. You are confirming whether the bill information exists and whether you know where to find it.
+        </p>
+        <div class="task-list">
+          <article class="field-card">
+            <div class="task-top">
+              <input id="bill-list-known" name="billListKnownChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="bill-list-known">I know where my bill list exists</label>
+              </div>
+            </div>
+            <label>
+              Optional notes
+              <textarea name="billListKnownNotes" placeholder="Example: notebook, app, spreadsheet, statement folder"></textarea>
+            </label>
+          </article>
+
+          <article class="field-card">
+            <div class="task-top">
+              <input id="due-dates-known" name="billDueDatesKnownChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="due-dates-known">I know statement due dates, or I am actively collecting them</label>
+              </div>
+            </div>
+            <label>
+              Optional notes
+              <textarea name="billDueDatesKnownNotes" placeholder="Add what is known already or what still needs to be gathered."></textarea>
+            </label>
+          </article>
+
+          <article class="field-card">
+            <div class="task-top">
+              <input id="minimum-payments-known" name="billMinimumPaymentsChecked" type="checkbox">
+              <div>
+                <label class="task-label" for="minimum-payments-known">I have identified minimum required payments</label>
+              </div>
+            </div>
+            <label>
+              Optional notes
+              <textarea name="billMinimumPaymentsNotes" placeholder="Add anything you want to remember about minimums or missing information."></textarea>
+            </label>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="credit-visibility-title">
+        <h2 id="credit-visibility-title">Section 4: Credit Visibility Setup</h2>
+        <p class="section-copy">
+          Credit awareness does not need to be elaborate. The goal is simply to know whether you are checking it and where that visibility lives.
+        </p>
+        <div class="field-grid">
+          <label>
+            Do you check credit monthly?
+            <select name="creditCheckMonthly">
+              <option value="">Select one</option>
+              <option value="yes">Yes</option>
+              <option value="sometimes">Sometimes</option>
+              <option value="not-yet">Not yet</option>
+            </select>
+          </label>
+          <label>
+            Where do you check it?
+            <input name="creditCheckLocation" type="text" placeholder="Example: bank app, credit bureau app, card issuer portal">
+          </label>
+        </div>
+        <div class="field-grid" style="margin-top: 14px;">
+          <label>
+            Do you track score changes?
+            <select name="creditTrackChanges">
+              <option value="">Select one</option>
+              <option value="yes">Yes</option>
+              <option value="sometimes">Sometimes</option>
+              <option value="not-yet">Not yet</option>
+            </select>
+          </label>
+          <label>
+            Optional notes
+            <textarea name="creditVisibilityNotes" placeholder="Use this for reminders, observations, or the next step you want to take."></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="summary-panel" aria-labelledby="pivot-ready-title">
+        <h2 id="pivot-ready-title">Section 5: Ready for Pivot Indicator</h2>
+        <p class="muted">
+          Your readiness summary updates automatically as you complete the setup details above.
+        </p>
+        <p class="muted">
+          You do not need every item complete to begin Pivot. This page helps confirm whether enough structure exists to support containment work.
+        </p>
+        <div class="summary-grid">
+          <article class="summary-item">
+            <strong>Banking structure ready</strong>
+            <span class="status" data-summary="banking">In progress</span>
+          </article>
+          <article class="summary-item">
+            <strong>Income landing visible</strong>
+            <span class="status" data-summary="income">In progress</span>
+          </article>
+          <article class="summary-item">
+            <strong>Bills identified</strong>
+            <span class="status" data-summary="bills">In progress</span>
+          </article>
+          <article class="summary-item">
+            <strong>Credit awareness started</strong>
+            <span class="status" data-summary="credit">In progress</span>
+          </article>
+        </div>
+        <div class="ready-message">
+          You are ready to begin the Pivot Monthly Containment workflow.
+        </div>
+        <div class="nav-actions">
+          <button class="nav-button" type="button">Back</button>
+          <a class="nav-button primary" href="https://roseandrevenuedesigns-source.github.io/pivot/">Begin Pivot</a>
+          <a class="nav-button" href="index.html">Return to Foundation Builder Home</a>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "financialFoundationBuilder.readinessSetup.v1";
+    const form = document.getElementById("foundation-form");
+    const fields = Array.from(form.querySelectorAll("input, textarea, select"));
+
+    function loadState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function saveState() {
+      const state = {};
+
+      fields.forEach((field) => {
+        if (!field.name) {
+          return;
+        }
+
+        state[field.name] = field.type === "checkbox" ? field.checked : field.value;
+      });
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      updateSummary(state);
+    }
+
+    function applyState(state) {
+      fields.forEach((field) => {
+        if (!field.name || !(field.name in state)) {
+          return;
+        }
+
+        if (field.type === "checkbox") {
+          field.checked = Boolean(state[field.name]);
+        } else {
+          field.value = state[field.name];
+        }
+      });
+    }
+
+    function setSummaryStatus(key, ready, supportingText) {
+      const node = document.querySelector(`[data-summary="${key}"]`);
+      node.textContent = ready ? "Ready" : supportingText;
+    }
+
+    function hasValue(value) {
+      return typeof value === "string" ? value.trim().length > 0 : Boolean(value);
+    }
+
+    function updateSummary(state = loadState()) {
+      const bankingReady =
+        Boolean(state.bankingPrimaryCheckingChecked) &&
+        Boolean(state.bankingBillPaymentChecked);
+
+      const incomeReady =
+        hasValue(state.incomeDepositLocation) &&
+        hasValue(state.incomeDepositStructure) &&
+        hasValue(state.incomeBillSeparation);
+
+      const billsReady =
+        Boolean(state.billListKnownChecked) &&
+        Boolean(state.billDueDatesKnownChecked) &&
+        Boolean(state.billMinimumPaymentsChecked);
+
+      const creditReady =
+        hasValue(state.creditCheckMonthly) &&
+        hasValue(state.creditCheckLocation);
+
+      setSummaryStatus("banking", bankingReady, "In progress");
+      setSummaryStatus("income", incomeReady, "In progress");
+      setSummaryStatus("bills", billsReady, "In progress");
+      setSummaryStatus("credit", creditReady, "In progress");
+    }
+
+    applyState(loadState());
+    updateSummary();
+
+    fields.forEach((field) => {
+      field.addEventListener("input", saveState);
+      field.addEventListener("change", saveState);
+    });
+  </script>
+  <img class="corner-stamp" src="pivot-logo.png" alt="">
+</body>
+</html>
